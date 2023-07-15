@@ -33,7 +33,7 @@ B --> D[Your keyboard plate is generated]
 10. Select `Keyboard Generator` and click the `move right` arrow in the middle
 11. Close the window and on your toolbar should now be a new button that starts this macro
 
->**NOTE**
+>**Note**
 >Still lost? Perhaps the [FreeCAD wiki](https://wiki.freecad.org/Customize_Toolbars) does a better job at explaining it then I did.
 
 ### Usage
@@ -43,7 +43,7 @@ B --> D[Your keyboard plate is generated]
 	* Optional: Make changes to any of the relevant form input controls
 4. Hit `Ok` and watch FreeCAD do what it does.
 
->**NOTE**
+>**Note**
 > *For large keyboard layouts FreeCAD will Freeze for a few seconds, I believe this is due to the single threaded nature of the constraint resolver in sketcher. The more constraints in a single sketch the longer it takes, this seems to scale exponentially. 
 > The key position master sketch will need a DistanceX and DistanceY constraint for every single key position. On a keyboard with 100 keys that's 200 constraints for key positioning alone.
 
@@ -90,7 +90,7 @@ The main focus of the macro, the tab 'Keyboard Data'  allows you to set many dif
 	* Set the padding to be applied to all sides, or mark the checkbox to set it for each side individually. Useful to create space for knobs, touchpads, joycons, batteries, displays or whatever else you might want to add to your keyboard.
 	* Per side checkbox 
 		* As expected this will allow you set the padding for each side individually.
->**NOTE**
+>**Note**
 >*This 19.05mm spacing only applies when the Spacing option for cutouts is set to the the default 19.05mm, it can be changed to 19mm under Cutout options > Spacing
 
 
@@ -193,7 +193,7 @@ Here's a few simple guidelines.
 * Use American English - it's got the majority vote out here on the internet
 	* ~The amount of times I've written colour instead of color and had to go back to edit it is beyond measure~ 
 
->**NOTE**
+>**Note**
 >I have gone out of my way rewriting large parts of the code to avoid having to rely on external libraries.
 >* This is to avoid having to add multiple licenses 
 >* This is to keep the macro fairly lightweight 
@@ -228,14 +228,14 @@ As with any other FreeCAD macro with a GUI, Qt is used. A big  thanks to The Qt 
 Everything else can be credited to me (Axeia), including all the icons and images. 
 * Admittedly  `/svgs/key-spacing.svg` is simply a modified SVGified version of an image found in [Matt3o's keyboard sizes guide](https://thegamingsetup.com/gaming-keyboard/buying-guides/keyboard-sizes)
 
->**NOTE**
+>**Note**
 > I have made no modifications to serial.py but the project by hajimen has a dependency listed for json5 and normally would use `import json5` to refer to [dpranke's json5 library](https://github.com/dpranke/pyjson5). Which is an awful lot of code and a different license to add to this project. 
 > So instead I've placed a `json5.py` file in the same directory that simply uses some regular expressions and transforms the json5 into plain old json, this can then be used by pythons own json module.
 
 ### Mentions
 The reason this project and many others exist is of course the keyboard-layout-editor.com site by [ijprest](https://github.com/ijprest/) which makes creating keyboard layouts easy and accessible. Early (non-publicized) versions of this macro were heavily inspired by [ijprest's pykle_serial](https://github.com/hajimen/pykle_serial/) but I have deviated from that greatly since then*.
 
->**NOTE**
+>**Note**
 > *For the curious a prototype version of this can be found [on my github](https://github.com/Axeia/Keyboard-Layout-Editor-SvgKeyboard) 
 
 Most of the footprints for switches and stabilizers used by this macro were made whilst heavily leaning on [swill's work on the kb_builder](https://github.com/swill/kb_builder/). I've used his kb_builder a few times to see if the results line up with my own as a sanity check as well.
