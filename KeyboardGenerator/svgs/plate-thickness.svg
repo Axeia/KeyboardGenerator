@@ -1,0 +1,42 @@
+<svg width="350" height="189" viewBox="0 0 350 189" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(90, 0)">
+    <rect x="61" y="2" rx="4" width="29" height="29" stroke="#555" stroke-width="4" fill="red" id="stem" />
+    <rect x="72" y="2" width="7.5" height="29" stroke="#555" stroke-width="4" fill="red" id="stem-side" />
+  </g>
+  <g transform="translate(90, 31)">
+    <polygon points="
+      20 0,
+      136 0,
+      148 48,
+      8 48      
+      " stroke="#555" stroke-width="4" fill="#000" id="switch-top-half" />
+  </g>
+  <rect x="89" y="79" width="159" stroke="#555" stroke-width="4" fill="#ccc" height="2"/>
+  <g transform="translate(90, 82)">
+    <polygon points="
+      8 0,
+      148 0,
+      136 48,
+      20 48
+    " stroke="#555" stroke-width="4" fill="#000" id="switch-bottom-half" />
+      
+    <polygon points="
+        4 17,
+        12 17,
+        15 25
+      " stroke="#555" stroke-width="4" fill="#555" id="left-nubbin" />
+      
+    <polygon points="
+        144 17,
+        154 17,
+        142 25
+      " stroke="#555" stroke-width="4" fill="#555" id="right-nubbin" />
+  </g>
+  <rect width="95" height="15" x="0" y="82" stroke-width="0" fill="#fff" id="plate-left" />    
+  <line x1="40" y1="82" x2="40" y2="98" stroke="#000" stroke-dasharray="1" id="plate-distance-line-left" />
+  <text stroke="transparent" fill="#fff" x="20" y="77" id="plate-txt-left">1.5mm</text>
+  
+  <rect width="120" height="15" x="240" y="82" stroke-width="0" fill="#fff" id="plate-right" />   
+  <line x1="290" y1="82" x2="290" y2="98" stroke="#000" stroke-dasharray="1" id="plate-distance-line-right" />
+  <text stroke="transparent" fill="#fff" x="270" y="77" id="plate-txt-right">1.5mm</text>
+</svg>

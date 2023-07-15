@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Keyboard Generator and Keyboard Details</title>
+	<style>
+		body{
+			font-family: Lato, Helvetica Neue, Helvetica, sans-serif;
+			background: #202225;
+			color: #fafafa;
+		}
+		.pad{ 
+			padding: 1rem; 
+			clear: both; 
+			background: #1D1F20;
+			position: relative;
+			border-radius: 3px;
+			margin-bottom: 3px;
+		}
+
+		h1, h2, h3, h4, h5, h6{
+			padding: 0;
+			margin: 0;
+		}
+		h2{
+			margin-top: 2rem;
+		}
+		p+h2{
+			margin-top: 1rem;
+		}
+		h1, h2{
+			border-bottom: 2px solid #444;
+			padding-bottom: 0.5rem;
+			padding-left: 0.2rem;
+			margin-bottom: 0.8rem;
+		}
+		h3{
+			margin-top: 1rem;
+		}
+		p, dl, li{
+			margin: 0.5rem;
+			line-height: 1.5rem;
+			color: #ddd;
+		}
+		a{
+			color: #4ec021;
+			text-decoration: none;
+		}
+		a:hover{
+			color: hsl(
+				calc(360deg * var(--char-percent)
+				), 
+				90%, 
+				65%
+			);
+			animation: rainbow-colors 5s linear infinite;
+			animation-delay: calc(-5s * var(--char-percent));
+		}
+		
+		@keyframes rainbow-colors {
+		  0% { color: hsl(0turn, 90%, 65%); }
+		  25% { color: hsl(.25turn, 90%, 65%); }
+		  50% { color: hsl(.5turn, 90%, 65%); }
+		  75% { color: hsl(.75turn, 90%, 65%); }
+		  100% { color: hsl(1turn, 90%, 65%); }
+		}
+		
+		dt{
+			font-weight: bold
+		}
+		section>section{
+			padding-left: 1.5rem;
+		}
+		section:target{
+		  animation-name: track-in-out;
+		  animation-duration: 1.5s;
+		  animation-iteration-count: once;
+		}
+		
+		@keyframes track-in-out {
+		  0% {
+			letter-spacing: 1em;
+			opacity: 0;
+		  }
+		  100% {
+			letter-spacing: normal;
+			opacity: 1;
+		  }
+		}
+
+		
+		table{ border: 0; margin: 1rem; }
+		th{ padding: 0.3rem; }
+		table tbody th{ text-align: right; }
+		td{ padding: 0.3rem 0.5rem; }
+		
+		.rgb{
+			background: linear-gradient(90deg, red, green, blue);
+			animation: rainbow 5s ease infinite;
+			background-size: 5rem 5rem;
+			padding: 0.2rem;
+			display: inline-block
+			
+		}
+		
+		@keyframes rainbow { 
+			0%{background-position:0% 82%}
+			50%{background-position:100% 19%}
+			100%{background-position:0% 82%}
+		}
+		ul, li{ padding: 0; margin: 0 }
+		li{ margin-left: 2rem; }
+		ul.conpro{
+			list-style: none;
+		}
+		ul.conpro li:before{
+			font-family: monospace;
+			text-shadow: 0rem 0rem 0.2rem #fff;
+		}
+		ul.conpro li.con:before{     content: "- " }
+		ul.conpro li.pro:before{     content: "+ " }
+		ul.conpro li.neutral:before{ content: "~ " }
+		
+		img.icon{ height: 1rem; }
+		
+		
+		.easy{		background-color: #506352; }
+		.medium{	background-color: #614c16; }
+		.hard, .error{		background-color: #614343; }
+		.custom{	background-color: #ff0000; }
+		
+		th[scope='row']{ background-color: rgba(255,255,255, 0.2); text-align: right; border-right: 2px solid #000; }
+		table#keyboard-stabs { border: 1px solid #cecece; }
+		table#keyboard-stabs thead tr:last-child th,
+		table#keyboard-stabs thead tr:first-child th[rowspan='2']{ border-bottom: 2px solid #000; }
+		td.num, th.num{ text-align: right; }
+		
+		table ul li{ margin-left: 1.5rem; }
+		@media (max-width: 1250px){
+			table ul li{ list-style: none; margin-left: 0.2rem }
+		}
+		.shrink-font{ font-size: 0.8rem; }
+		
+		#credits-table{ 
+			border: 0;
+		}
+		#credits-table td{
+			padding: 0.5rem;
+			background-color: rgba(180,255,180, 0.05)
+		}
+		#credits-table tr td:not(:first-child){
+			margin-left: 3px;
+		}
+		
+		code{
+			background-color: rgba(180,255,180, 0.1);
+			padding: 0.5rem;
+			font-style: normal;
+			font-size: 1rem;
+			white-space: nowrap;
+		}
+		
+		p.special-note{
+			margin-top: 2rem;
+		}
+		
+		table.outlined{
+			border: 1px solid #fff;
+			cellspacing: 0;
+			cellpadding: 0;
+		}
+		table.outlined thead th { border-bottom: 1px solid #fff; border-right: 1px solid #fff; }
+		table.outlined thead th:last-child{ border-right: 1px solid transparent; }
+		table.outlined tbody th:not(:last-child),
+		table.outlined tbody td:not(:last-child){
+			border-right: 1px solid #fff;
+		}
+		table.outlined tr:not(:last-child) th,
+		table.outlined tr:not(:last-child) td{
+			border-bottom: 1px solid #fff;
+		}
+		table.outlined tfoot td{ 
+			border-top: 1px solid #fff;
+		}
+		
+		#color-legend{
+			width: 40rem;
+		}
+		
+		.floater{ float: left; }
+		.clearer{ clear: both; }
+		
+		.attention{
+			display: inline-block;
+			padding: 2rem;
+			border: 5px double #fff;
+		}
+		
+		.spread-list{ line-height: 2rem; }
+		.note{ display: list-item; font-size: 0.8rem; } 
+		.note img{ vertical-align: middle; }
+		
+		.question-icon{
+			max-width: 1.25rem;
+			max-height: 1.25rem;
+			filter: grayscale(1)
+		}
+		.question-icon:hover{
+			filter: grayscale(0);
+			cursor: pointer;
+		}
+		
+		#switch-detailed img { height: 60px; float: left; margin: 0.5rem; margin-left: -1rem; }
+		.clear, #switch-detailed dt{ clear: both; }
+		tr#visuals img{ height: 4rem; }
+		tr#visuals td{ text-align: center; }
+
+		::-webkit-scrollbar {
+			width: 10px;
+		}
+
+		::-webkit-scrollbar-track {
+			border-radius: 10px;
+			background: transparent;
+		}
+
+		::-webkit-scrollbar-thumb {
+			background: #505050;
+			background-size: 100% 100%;
+			border-radius: 10px;
+			animation: gradient 15s ease infinite;
+		}
+		::-webkit-scrollbar-thumb:hover {
+			background: #707070;
+		}
+		
+		@keyframes gradient {
+		0% {
+			background-position: 0% 50%;
+		}
+		50% {
+			background-position: 100% 50%;
+		}
+		100% {
+			background-position: 0% 50%;
+		}
+	}
+	
+	.index li{
+		list-style-type: none;
+		margin-left: 0;
+		line-height: 1.5rem;
+		padding-left: 1.5rem;
+	}
+	.index li:a{ position: relative; }
+	
+	.index li a:before{
+		content: url('icons/questionmark.svg');
+		display: inline-block;
+		width: 1.25rem;
+		filter: grayscale(1);
+		position: absolute;
+		margin-left: -1.55rem;
+		margin-top: 0.1rem;
+	}
+	.index li a:hover:before{ filter: grayscale(0); }
+	ol.index{
+		padding-left: 1rem;
+	}
+
+	</style>
+</head>
+<body>
+
+<section id="keyboard-generator">
+	<h1>Keyboard Generator</h1>
+	<p>This is a Macro written with the intend of aiding people in making a keyboard in FreeCAD. Basically I didn't want to lay out every single key position by hand and this is the result of that.</p>
+	<p>Design your keyboard layout on <a href="https://keyboard-layout-editor.com">keyboard-layout-editor.com</a> paste the Raw Data fields output into this macro and off you go.</p>
+	<p>A fair amount of the work in this macro is 'inspired' by <a href="https://github.com/swill/kb_builder/">Swill's kb builder</a> which is a tried and tested tool and should be a solid base. Official specs are hard come to by and I only managed to find them (partially) for Cherry MX and Gateron switches and stabilizers instead of trying to stick to them to the letter I opted to use Swill's approach*</p>
+	<p>The Macro is meant to be intuitive to use and I'd say just try and see what happens, but pay attention when things turn a red color as it indicates something is either very non-standard or going wrong</p>
+	<p class="note">*Swill mainly deviates from the '2u' stabilizer from the official Cherry MX spec, but in a positive way - increasing stability.</p>
+	
+	<p><strong>Disclaimer:</strong>. This project contains a whole lot of firsts to me and might not be the best way of approaching things, before writing this macro I've never used The Qt Framework, the Python programming language or any form of CAD software.</p>
+	
+	<section>
+		<h2>Limitations</h2>
+		<ul>
+			<li>No support for stepped keys, changing them to a normal key for this macro should be fine, to the best of my knowledge is only visual to the keycap. Switch positioning should be the same</li>
+			<li>No big enter support, Sorry I couldn't find any documentation as to where to place the switch for a big enter</li>
+			<li>No support for accoustic or flex cutouts, you'll have to add them yourself</li>
+			<li>No automatic screwhole placement</a>
+		</ul>
+		<p class="note">FreeCAD freezing for (up to) several seconds when pressing the Ok button is a known limitation but I don't think it can be fixed. Sketcher is single threaded in nature and struggles when there's many constraints in a single sketch, I've tried to have as few constraints as possible per Sketch but the KeyPosMasterSketch simply cannnot be any simpler.</p>
+	</section>
+	
+	<section>
+		<h2>Index</h2>
+		<section>
+			<h3>Macro description</h3>
+			<p>Clicking one of the <img src="icons/questionmark.svg" class="question-icon" /> questionmark icons in the macro will take you to the relevant section of this document, or use the list below.</p>
+			<ol class="index">
+				<li><a href="#keyboard-layout-editor">keyboard-layout-editor.com</a></li>
+				<li><a href="#plate">Plate</a>
+					<ol>
+						<li><a href="#plate-corner-style">Corner style</a></li>
+						<li><a href="#plate-corner-radius">Corner radius</a></li>
+						<li><a href="#style-radius-per-corner">Style/Radius per corner</a></li>
+						<li><a href="#style-radius-per-corner">Thickness</a></li>
+					</ol>
+				</li>
+				<li><a href="#padding">Padding</a>
+					<ol>
+						<li><a href="#pad-from">Pad from</a></li>
+						<li><a href="#pad-all-by">Pad all by</a></li>
+						<li><a href="#pad-per-side">Padding per side</a></li>			
+					</ol>
+				</li>
+				<li><a href="#cutouts">Cutouts</a>
+					<ol>
+						<li><a href="#cutout-switch">Switch</a></li>
+						<li><a href="#cutout-stab">Stabilizer</a></li>
+						<li><a href="#cutout-kerf">Kerf</a></li>
+						<li><a href="#cutout-spacing">Spacing</a></li>
+					</ol>
+				</li>
+				<li><a href="#kerf">Kerf</a></li>
+			</ol>
+		</section>
+		
+		<section>
+			<h3>Additional information</h3>
+			<p>I did some information gathering and figured I'd document it to speed things up for other keyboard builders</p>
+			<ol class="index">
+				<li><a href="#the-deep-end">Diving in deep</a>
+					<ol>
+						<li><a href="#sound-and-feel">Sound &amp; feel</a></li>
+						<li><a href="#looks">Looks</a></li>
+						<li><a href="#switches">Switches</a>
+							<ol>
+								<li><a href="#actuation-distance-and-force">Actuation distance and force </a></li>
+							</ol>
+						</li>
+						<li><a href="#opensource-keyboard-firmware">Opensource keyboard firmware</a></li> 
+					</ol>
+				</li>
+			</ol>
+		</section>
+	</section>
+</section>
+
+<section id="keyboard-layout-editor">
+	<h2>keyboard-layout-editor.com</h2>
+	<p>
+		This macro is intended to be used in conjunction with the <a href="http://www.keyboard-layout-editor.com/">keyboard-layout-editor.com</a> website. On this website you can 
+		create a keyboard layout and it will generate a JSON5 code under the "&lt;/&gt;Raw data" tab. You can copy/paste this code into the keyboard-layout-editor.com titled field in the macro.
+	</p>
+	<p>Whilst  this input field is focussed the keyboard will render keycaps, when focus is lost it just shows the switch and stabilizer cutouts. This is done so that when you paste a layout the result is easy to compare to the site.</p>
+</section>
+
+<section id="plate">
+	<h2>Plate</h2>
+	<section id="plate-corner-style">
+		<h3>Plate corner style</h3>
+		<p>You can pick between an angled <img src="icons/corner_angled.svg" class="icon" alt="">, 
+		   rounded <img src="icons/corner_rounded.svg" class="icon" alt=""> 
+		   or right angle <img src="icons/corner_right_angle.svg" class="icon" alt=""> style. 
+		   Selecting the right angle option will hide the radius input(s). 
+		</p>
+	</section>
+	<section id="plate-corner-radius">
+		<h3>Corner Radius</h3>	
+		<p>The corner radius inputs are only available for the rounded and angled corner styles. 
+		   <ul>
+			 <li>If the <code>Single</code> radiobutton is checked the X and Y distance are equal
+				<ul>
+					<li>For rounded corners that means circular corners (a quarter of a circle)</li>
+					<li>For angled corners that means 2 45° angles
+				</ul>
+			 </li>
+			 <li>If the <code>Seperate X&amp;Y</code> radiobutton is checked the UI will show a second input allowing you to set the X and Y distance seperately for elliptically rounded corners or an adjustable slanted angle</li>
+		</p>
+	</section>
+	
+	<section id="style-radius-per-corner">
+		<h3>Style/Radius per corner</h3>
+		<p>Checking this option disables the global style and radius inputs and present the same controls but on a per corner base</p>
+	</section>
+	
+	<p class='note'>
+		<strong>Note 1: </strong> Altering values relating to corners may result in cutouts being drawn in <span class="error">red</span> because the cutout is (partially) outside the plate.
+	</p>
+	<p class='note'>
+		<strong>Note 2: </strong> In extreme cases the rounding or angling of one corner might start overlapping with another corner in which case the <span class="error">the entire corner will be highlighted in red</span>
+	</p>
+	
+	
+	<section id="plate-thickness">
+	<h3>Plate thickness</h3>
+	<p>	
+		<img src="svgs/plate-thickness.svg" style="float: right;" alt="">
+		Per Cherry's specifications plate thickness should be 1.5mm (±0.1mm). It is not recommended to deviate from this.
+	</p>
+	<p>
+		Selecting the plate thickness field will change the preview to the image on the right. This is a side view of the plate showing where the plate should sit in the switch, it should fall right in between the little nubs which it does at 1.5mm.
+	</p>
+		
+	<ul>
+		<li>Less than 1.5mm will lead to wobbly switches due to the clips not having a tight fit</li>
+		<li>More than 1.5mm prevents the switches from clipping onto the plate.
+			<ul>
+				<li>Acrylic plates sometimes do go up all the way to 5mm, at that point the bottom of the plate and the bottom of the switch housing are at an equal level</li>
+			</ul>
+		</li>
+		<li>More than 5mm means the bottom of the switch will be recessed into the plate at which point a PCB is unable to seat the switches properly.</li>
+	</ul>
+	</section>
+</section>
+
+<section id="padding">
+	<h2>Padding</h2>
+	<section id="pad-from">
+		<h3>Pad from</h3>
+		<dl>
+			<dt>Reserved</dt>
+			<dd>Comes from the concept of using '1u' of space for every normal sized key, by default 1u is 19.05mm* it then takes the padding from there. <strong>(Recommended)</strong></dd>
+			
+			<dt>Cutout</dt>
+			<dd>Will begin padding from whichever switch is closest to one of the sides, useful for very fine grain control or making a plate as small as possible</dd>
+		</dl>
+		<p>
+			Confused? Hopefully <a href="#fig1">fig 1</a> will clear it up
+		</p>
+		<figure>
+			<img id="fig1" src="svgs/key-spacing.svg" width="700px" />
+			<figcaption>Fig 1. Keyspacing for a simple keyboard of 2 keys</figcaption>
+		</figure>
+	</section>
+	<section id="pad-all-by">
+		<h3>Pad all by</h3>
+		<p>Sets the padding on all sides by the amount given in the input field</p>
+	</section>
+	<section id="pad-per-side">
+		<h3>Padding per side</h3>
+		<p>Allows padding to be set for the top, left, right and bottom individually</p>
+	</section>
+	
+	<p class="note">*This is 19.05mm spacing is based on what is set under <a href="#cutout-spacing">Cutouts &gt; Spacing</a> </p>
+	<p class="note">When selecting "Pad from -> cutout" with the padding at the default 0 all switches contacting the side will be highlighted in red to indicate an error</p>
+	<p class="note">The color used for highlighting the padding to your FreeCAD theme (it's the same as the background of a text selection)</p>
+</section>
+
+<section id="cutouts">
+	<h2>Cutouts</h2>
+	<section id="cutout-switch">
+		<h3>Switch</h3>
+		<section>
+			<h4><button title="Rotate with vertically stabilized keys">90° ↻</button> - Rotate with vertically stabilized keys</h4>
+			<p>A global toggle to rotate switches by 90°c for vertically layed out keys. Confusingly with the default selected Cherry switch it does nothing as rotating a square results in the same square.</p>
+			<p>Basically think of something like the "+" and "Enter" buttons on the numpad. Should the switch for keys like these be rotated?</p>
+			<dl>
+				<dt>No - don't rotate</dt>
+				<dd>Most Cherry keyboards don't seem to rotate any switch. This makes for tidier PCBs were all the switch contacts are orientated the same</dd>
+				<dd>Backlit keyboards with shine-through keycap likely want to prevent rotating switches as the switch might have space reserved for a LED or even have a lens to enhance the effect of LEDs.</dd>
+				
+				<dt>Yes - Rotate</dt>
+				<dd>Alps keyboards seem to usually rotate the key with the stabilizer </dd>				
+			</dl>
+			<p class="note">With the standard Cherry cutout being a square it's impossible to tell whether it rotated 180° or not</p>
+			<p class="note"><img src="svgs/mouse-left-click.svg" alt="" /> Left clicking a stabiliser will rotate the switch on a per key basis</p>
+		</section>
+		<p>This Macro offers multiple switch cutouts (similar to <a href="http://builder-docs.swillkb.com/features/#switch-type">Swill's plate builder</a>), each with their own pros and cons. 
+		   Depending on where you get the work done you might be able to save costs by keeping the shapes as simple as possible
+	   </p>
+	
+		<table class="shrink-font">
+			<caption>Recap</caption>
+			<thead>
+				<tr>
+					<th></th>
+					<th>Cherry MX</th>
+					<th>Cherry MX Openable</th>
+					<th colspan="2">Cherry MX + Alps</th>
+					<th>Alps</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Stability</th>
+					<td class="easy">Great</td>
+					<td class="medium">Good</td>
+					<td class="hard" colspan="2">Okay</td>
+					<td class="easy">Great</td>
+				</tr>
+				<tr>
+					<th>Openable <div>(Whilst soldered)</div></th>
+					<td class="hard">No</td>
+					<td class="easy">Yes</td>
+					<td class="easy">Cherry: Yes</td>
+					<td class="hard">Alps: No</td>
+					<td class="hard">No</td>
+				</tr>
+				<tr>
+					<th>Complexity <div>(might increase costs)</div></th>
+					<td class="easy">Easy</td>
+					<td class="hard">Hard</td>
+					<td class="medium" colspan="2">Medium</td>
+					<td class="easy">Easy</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="6">Unless flexibility is desired stick to the standard cutouts for the most secure mount</td>
+				</tr>
+				<tr>
+					<td colspan="6">If you're building a plate mounted keyboard stability is important.  If you're building a PCB-mounted keyboard stability will come from the solder itself.</td>
+				</tr>
+			</tfoot>
+		</table>
+	
+		<dl id="switch-detailed">
+			<dt>Cherry MX</dt>
+			<dd><img src="svgs/switch-cherry.svg" alt="" />
+			The Cherry MX standard as per Cherry's specifications, fits Cherry MX keys (and clones) 
+			- basically just a simple 14mm square (according to the specs up to a 0.3mm corner radius is allowed as well 
+			although this macro just does square holes)</dd>
+			
+			<dt>Cherry MX Openable</dt>
+			<dd><img src="svgs/switch-cherry-openable.svg" alt="" />
+			The same 14x14mm square as Cherry MX, but with some additional 'wings' (and thus complexity) to the sides that allow 
+			for opening of the switch<sup>[1]</sup> whilst leaving the (presumably soldered) bottom of the switch to remain on the PCB. 
+			This allows for easy access to the inside of the switch for modding purposes (replacing the spring, lubing etc) 
+			<em>but</em> might lead to a more wobbly switch due to less contact surface with the plate. </dd>
+			
+			<dt>Cherry MX + Alps</dt>
+			<dd><img src="svgs/switch-cherry+alps.svg" alt="" />
+			A hybrid of Cherry MX and Alps by combining both footprints so the plate can fit either switch, 
+			this does greatly reduce the amount of contact surface between the plate and the switch as a Cherry switch 
+			will only make horizontal contact whilst Alp switches will only make vertical contact with the plate. 
+			The Cherry switch would be openable (see above) due to extra side clearance for the Alps switch. 
+			The least stable but most flexible mount option.</dd>
+			
+			<dt>Alps</dt>
+			<dd><img src="svgs/switch-alps.svg" alt="" />A simple rectangle of 15.5x12.8mm</dd>
+		</dl>
+	
+		<p class="clear">¹ <em>The extra space allowing for opening of the Switch might not do the trick for Cherry clones, <a href="https://deskthority.net/viewtopic.php?p=429001&sid=35fc1582a0488e54ed2d8648a780c282#p429001">Kailh and Outemu might be a no-go</a> </em></p>
+	</section>
+	
+	<section id="cutout-stab">
+		<h3>Stabilizer</h3>
+		<section id="cutout-stab-flipped">
+			<h4>Flipped 180° ⮃</h4>
+			<p><button>180° ⮃</button> Some keyboards have flipped stabilizer cutouts, enabling this button allows you to do the same for all stabilizers in one go. 
+			As far as I know there's no practical reason to do so but the option is there if you want to use it. 
+			</p>
+			<p class="note"><img src="svgs/mouse-right-click.svg" alt="" /> A right click will flip the stabilizer on a per key basis. This can be useful in for example an ergonomic layout such as the Ergodox where the right side mirrors the left, flipping one side can make it truely mirrored</p>
+		</section>
+		<p>Switches and Stabilizers go hand in hand. All keys require switches and all keys above a certain width require and will be automatically assigned a stabilizer.</p>
+		<p>The Alps stabilizer option is disabled unless the Alps switch is selected as I could not think of a case where someone would want Alps stabilizers for Cherry or Hybrid switches.</p>
+		
+		<p>This macro offers several stabilizer cutout options. Each with its own pros and cons</p>
+		<table class="shrink-font outlined">
+			<thead>
+				<tr>
+					<th>Type</th>
+					<th>Cherry+Costar</th>
+					<th>Cherry</th>
+					<th>Costar</th>
+					<th>Alps</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Compatibility</th>
+					<td>Costar, Cherry, PCB and Plate mount</td>
+					<td>Cherry, PCB and plate mount</td>
+					<td>Costar</td>
+					<td>Alps</td>
+				</tr>
+				<tr>
+					<th>Stability</th>
+					<td class="hard">Okay</td>
+					<td class="easy">Great</td>
+					<td class="easy">Great</td>
+					<td class="easy">Great</td>
+				</tr>
+				<tr id="visuals">
+					<th>Visual</th>
+					<td><img src="svgs/stabilizer-cherry+costar.svg" alt="" /></td>
+					<td><img src="svgs/stabilizer-cherry.svg" alt="" /></td>
+					<td><img src="svgs/stabilizer-costar.svg" alt="" /></td>
+					<td><img src="svgs/stabilizer-alps.svg" alt="" /></td>
+				</tr>
+				<tr>
+					<th>Complexity <div>(might increase costs)</div></th>
+					<td class="hard">Hard</td>
+					<td class="hard">Hard</td>
+					<td class="easy">Easy</td>
+					<td class="easy">Easy</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<td colspan="5">Basically, unless you're planning on using Costar at any point Cherry for Cherry, Alps for Alps</td>
+			</tfoot>
+		</table>
+		<section id="cutout-stab-types">
+			<h4>Cherry, Cherry+Costar, Costar</h4>
+		   <p>Technically Cherry sizes work as follows: <ul>
+		     <li>Everything bigger than 2u and smaller than 3u gets the standard 2u stabilizer size (which is 1.25 * 19.05)</li>
+			 <li>Everything bigger than 3u gets calculated using the formula <code>KeySize-1 * 19.05</code></li>
+			 <li>Everything bigger than 8u gets converted to 8u as there's no stabilizers wider than that and even 8 is technically already outside the standard sizing</ul>
+		   </p>
+		   
+			<table class="shrink-font outlined">
+				<caption>Cherry standard key and stabilizer sizes</caption>
+				<tbody>
+					<tr>
+						<th>Size</th><th>1</th><th>1.25</th><th>1.5</th><th>1.75</th><th>2u</th><th>2.25u</th><th>2.75u</th><th>6.25u</th><th>7u</th>
+					</tr>
+					<tr>
+						<th>Switch to stabilizer distance <div>(in mm)</div></th><td colspan="4"><td colspan="3">23.8125<div></div></td><td>100.0125</td><td>114.3</td>
+					</tr>
+				<tbody>
+				<tfoot>
+					<tr>
+						<td></td><td colspan="9"><strong>Note:</strong> Keys 2u and up will be stabilized</td>
+					</tr>
+				</tfoot>
+			</table>
+	   </section>
+	   <section>
+			<h4>Alps</h4>
+			<p>For Alps I cannot find any official documentation so the numbers are based off those found on existing keyboards and other tools, curiously Alps stabilizes 1.75u keys unlike Cherry.
+		     </p>
+			 <p>The problem with Alps is that I don't know what formula they use to calculate stabilizer sizes. So if you plan on recycling Alps stabilizers and keycaps from an old keyboard I strongly suggest you stick to their standard sizing:
+			 
+			<table class="shrink-font outlined">
+				<caption>Alps standard key and stabilizer sizes</caption>
+				<tbody>
+					<tr>
+						<th>Size</th><th>1</th><th>1.25</th><th>1.5</th><th>1.75u</th><th>2u</th><th>2.25u</th><th>2.75u</th><th>6.25u</th><th>6.5u</th>
+					</tr>
+					<tr>
+						<th>Switch to stabilizer distance <div>(in mm)</div></th><td colspan="3"><td>11.938</td><td colspan="3">14.096</td><td>41.859</td><td>45.3</td>
+					</tr>
+				<tbody>
+			</table>
+			 
+			<p class="note">If you're using non-standard Alps sizing a fallback to Costar stabilizers and the Cherry formula will be used</p>
+	   </section>
+	</section>
+	
+	
+	<section id="cutout-kerf">
+		<h3>Kerf (-1mm to +1mm)</h3>
+		<p><strong>tldr; The amount your cuts shrink by when entering a positive number, or grows by if entering a negative number</strong></p>
+		<p>
+			Kerf traditionally allows for compensating of extra material by the cutting process itself and allows you to do so by inputting a positive number.
+			If however you are 3d printing instead of cutting a hole your printing the surroundings effectively creating a hole. In that case instead of a positive number you may want to use a negative number to offset your material expanding as it cools.
+		</p>
+		<p>
+			If you're outsourcing the cutting of your plate this might be something to ask if you should compensate for, most companies will automatically accomodate for it
+		</p>
+	</section>
+	
+	<section id="cutout-spacing">
+		<h3>Spacing</h3>
+		<p>Determines the space between the center of switch cutouts, 19.05mm is the default and highly recommended default option. It's how practically every keyboard ever is made</p>
+		<p>However, there's a few keyboards on the market that use 19mm spacing presumably for making nice round numbers. The only other potentional benefit I can think of is a slightly smaller keyboard saving a tiny amount of material</p>
+		<p class="note">Stabilizer width calculations will use 19.05mm regardless of the setting used here as as far as I know the stems on the keycaps are always calculated using 19.05mm spacing and for big keys this 0.05mm deviation is multiplied which would worsen any potentional issues.</class>
+	</section>
+	
+	<section id="standard-sizes">
+	<h3>Sizing</h3>
+		<p>At the bottom of the macro window a quick overview is given to give you an idea of what you'll need to turn this keyboard into reality.</p>
+		<p>In both the stabs and keys tables the top row indicates which sizes are used in your keyboard layout and the bottom rows shows how many of that particular size. The cells are also color coded to indicate if you're using any key or stabilizer sizes that are hard to come by.</p>
+
+	<dl id="color-legend">
+		<dt class="easy">Green</dt>
+		<dd>Bog standard - easy to buy</dd>
+		
+		<dt class="medium">Orange</dt>
+		<dd>Could be problematic to find, you might have to look around a bit and order from somewhere you're not familiar with</dd>
+		
+		<dt class="hard">Red</dt>
+		<dd>Theoretically they exist but finding them is a different matter</dd>
+		
+		<dt class="custom">Bright Red</dt>
+		<dd>You're in fully custom terrority now, you'll either have to fabricate something yourself or commission someone to do it for you</dd>
+	</dl>
+	</section>
+	
+</section>
+
+<div id="credits" class="pad">
+	<h2>Credits</h2>
+
+	<table id='credits-table'>
+		<tr>
+			<th>Part</th>
+			<th>Author</th>
+			<th>License</th>
+		</tr>
+		<tr>
+			<td><a href="https://github.com/Axeia/">The macro itself</a> and all the SVGs it uses</td>
+			<td>Axeia</td>
+			<td>Macro and svgs: MIT</td>
+		</tr>
+		<tr>
+			<td>This macro comes with serial.py from <a href="https://github.com/hajimen/pykle_serial/">pykle_serial</a> with some very minor changes to avoid using other external libraries.</td>
+			<td>hajimen</td>
+			<td>MIT</td>
+		</tr>
+		<tr>
+			<td>Creator of <a href="https://keyboard-layout-editor.com">keyboard-layout-editor.com</a> which this macro uses the output of. Also the author of <a href="https://github.com/ijprest/kle-serial">kle-serial</a> on which the above pykle_serial is based</td>
+			<td>ijprest</td>
+			<td>MIT</td>
+		</tr>
+		<tfoot>
+		<tr>
+			<td colspan="3"><strong>Honorable mention #1:</strong> swill's <a href="https://github.com/swill/kb_builder/">kb_builder</a>, although no code is used directly from it - it has been a source of inspiration and a good way of double checking if the results here make sense</td>
+		</tr>		
+		<tr>
+			<td colspan="3"><strong>Honorable mention #2:</strong> The Qt Company for providing an awesome framework which allowed me to get a lot done with less code than I expected.</td>
+		</tr>
+		</tfoot>
+	</table>
+	<p>This is my first experience with Python, Qt (PySide2) and FreeCAD. Chances are the code could be greatly improved upon, feel free to contribute.</p>
+	<p>The same goes for the SVGs, I'm no artist so any artists/designers that can do a better job are welcomed.</p>
+</div>
+
+
+<section id="other-tools" class="pad">
+	<h2>Other tools</h2>
+	<p>This is of course not the only tool for a custom keyboard, here's some others I've found that you may want to check out</p>
+
+	<h3><a href="https://kbplate.ai03.com/">aio3 Plate Generator</a></h3>
+	<dl>
+		<dt>Pros:</dt>
+		<dd>Many customization options (acoustic cutouts, different stabilizer cutouts etc)</dd>
+		<dd>Supports alternative switches like i-Rocks</dd>
+		<dd>Mature (tried and tested)</dd>
+	</dl> 
+
+	<h3><a href="http://builder.swillkb.com/">swillkb Plate &amp; Case Builder</a></h3>
+	<dl>
+		<dt>Pros:</dt>
+		<dd>Can generate an entire keyboard in a convenient file format you can send straight to a manufacturing service</dd>
+		<dd>Supports, Cherry, Alps and hybrid cutouts</dd>
+		<dd>Allows for some customisation in the form of adding custom additive and subtractive shapes</dd>
+		<dd>Mature (tried and tested)</dd>
+	</dl> 
+	
+	<h3><a href="https://plate.keeb.io/">plate.keeb.io</a></h3>
+	<dl>
+		<dt>Pros</dt>
+		<dd>Many options for cutouts</dd>
+	</dl>
+
+	<h3>This Macro</h3>
+	<dl>
+		<dt>Pros:</dt>
+		<dd>Provides you with FreeCAD files to allow full customisation</dd>
+		<dd>Supports stabilizer sizes the others don't support by calculating them rather than looking up them up from a known list 
+		<div class="note"><sub>Warning: Going custom with sizing will likely mean making or commissioning own keys and stabilizers as well.</sub></div></dd>
+	</dl> 
+	<dl>
+		<dt>Cons:</dt>
+		<dd>Not mature software, double check everything makes sense</dd>
+		<dd>Cherry switches only</dd>
+	</dl>
+	<dl>
+		<dt>Different:</dt>
+		<dd>Costar mounts are centered with the switch whereas aio3 places them at a downwards offset and swills at an upward offset. 
+		I opted for center alignment as it is the most aestetically pleasing option in my opinion. 
+		<em><sub>I own a keyboard that has them centered, so I can confirm it works fine</sub></em></dd>
+	</dl>
+</section>
+
+<section id="the-deep-end" class="pad">
+	<h2>Diving in deep</h2>
+	<p>Below are some useful pointers/links/tidbits for myself that I figured I'd document here as to help others. Let's start off with some terminology</p>
+	<dl>
+		<dt>Scratchy</dt>
+		<dd>The feeling transmitted from a key where one hard surface rubs against another (basically a non smooth feeling, most pronounced on non-lubed keys that haven't been worn in yet)</dd>
+		
+		<dt>Bottoming out</dt>
+		<dd>Pressing the key all the way down</dd>
+		
+		<dt>Actuation point</dt>
+		<dd>When pressing down the key the point at which the keyboard registers the keystroke</dd>
+		
+		<dt>Actuation force</dt>
+		<dd>The amount of force that needs to be applied to press the switch down</dd>
+		
+		<dt>Ping</dt>
+		<dd>High frequency sound caused by vibrating metal (vibrations traveling through the mount plate or the springs inside the switches)</dd>
+		
+		<dt>Clack</dt>
+		<dd>Higher frequency version of the sound made when hitting a key, usually a thock is preferred (see below)</dd>
+		
+		<dt>Thock</dt>
+		<dd>Lower frequency version of the sound made when hitting a key, usually due to reducing the higher frequency noises with some form of dampening</dd>
+	</dl>
+	
+	<section>
+		<h3 id="sound-and-feel">Sound &amp; feel</h3>
+		<p>There's a lot that can be done to affect the sound and feel of a keyboard. In general when it comes to noise less is considered to be better; and hollow/scratchy/echo sounds are to be avoided especially. The 'feel' people are divided on, some prefer a solid feeling steel plate keyboard, others find it fatiqueing and want some give in the typing experience etc etc</p>
+		<ul>
+			<li>
+				
+				The aim of most of these is to reduce unwanted noise and increase how 'smooth' a key feels or just how nice the keycap itself feels.
+				<ul>
+					<li>
+						<a href="https://switchandclick.com/how-to-mod-your-stabilizers-band-aid-clip-and-lube/">Lubing, clipping and &amp; band-aid modding stabilizers</a>
+						<ul>
+							<li>Lubing (with a relatively thick grease) reduces rattle and makes the keys feel less 'scratchy'</li>
+							<li>Band-aid mod dampens the sound of the stabilizers hitting the PCB</li>
+							<li>Clipping - increases the surface area of the PCB being hit which I'm guessing leads to less force applied to any single point and thus less noise?</li>
+						</ul>
+					</li>
+					<li><strong>Plate Choice</strong> Affects the sound and flex whilst typing, here's an <a href="https://www.youtube.com/watch?v=ZoaqGhaU-RE">audio comparison by Austin V on YouTube </a>
+						 <ul>
+							 <li>Steel - Stiff and reverberates quite a bit</li>
+							 <li>Brass - from what I understand slots in between steel and aluminium</li>
+							 <li>Aluminium - More flexible than steel and a little bit more quiet (the most common option)</li>
+							 <li>Polycarbonate - Absorbs sound, a quieter thockier option but not as rigid as the metals, great for <span>RGB LEDs</span></li>
+							 <li>Carbon Fiber - Very expensive, very flexible</li>
+						 </ul>
+					</li>
+					<li>Lubing switches results in a smoother less scratchy feeling</li>
+					<li><a href="https://switchandclick.com/the-best-o-rings-for-silencing-your-mechanical-keyboard/">O-Rings</a> will dampen 'bottoming out' keys a great deal. (Pro: A lot more quiet, Con: Mushy feel)</li>
+					<li>Pad the inside of keys (or at least the larger ones) with foam to reduce noise (many commercial products are available for the spacebar)</li>
+					<li>Replace the spring for the spacebar switch (or the entire) switch for one with a higher actuation force if your thumbs hit the keyboard harder than your fingers do</li>
+					<li><a href="https://switchandclick.com/how-to-film-a-switch-on-a-mechanical-keyboard-step-by-step-guide/">Applying switch films</a> increases stability of the switch and gives a deeper (thock) sound</li>
+					<li>Foam pad sticker between switch and mount plate, decreases noise when bottoming out</li>
+					<li>Foam pad sticker between switch and PCB, decreases noise when bottoming out</li>
+					<li>
+						<strong>Keycaps</strong> (<a href="https://thegamingsetup.com/gaming-keyboard/buying-guides/abs-vs-pbt">extensive ABS vs PBT comparison</a>)
+						<dl>
+							<dt>ABS</dt>
+							<dd>A softer sound but it wears down more quickly than PBT and gets a 'shiny' look</dd>
+							
+							<dt>PBT</dt>
+							<dd>A more resilient (harder) plastic but it results in a more pronounced sound</dd>
+							
+							<dt>Exotic</dt>
+							<dd>CNC'd metal or custom made ceramic (extremely expensive)</dd>
+						</dl>
+						<strong>Doubleshot</strong> is a term you'll often see and refers to the production where one plastic is shot into another to form the keycap and the 'writing' on it. Usually the outside is black or white and the inside is the opposite color and/or translucent, translucency allows for lighting to shine through. 
+						The alternatives would be laser etching, printing on the letters or labeling them stickers. The last two options are considered the worst and least durable methods.
+					</li>
+					
+				</ul>
+			</li>
+		</ul>
+	</section>
+	
+	<section id="looks">
+		<h3>Looks</h3>
+		<p>Looks are mostly down to material (aluminium, steel, acrylic, etc). The choice of keycaps (and their material) and the paintjob (if any)</p>
+		<ul>
+			<li>Pudding keycaps. Keycaps where a good part of the side of the keycap is translucent to allow for a large amount of light to shine through</li>
+			<li>
+				North vs South facing switches. This refers to where the LED on the PCB is mounted and thus the LED cutout/Lens on the switch should face.
+				<ul>
+					<li>North: Better for RGB as key-legends are usually on the top of keycaps and thus closer to the led (see South for the downside)</li>
+					<li>South: Better keycap compatibility. Keycaps come in various profiles (shapes), some of which can have clearance issues for LEDs with north facing switches.</li>
+				</ul>
+				Rule of thumb is that south facing switches are preferred <u>unless</u> RGB is important to you, in which case go with north-facing switches and keep the needed LED clearance in mind when buying keycaps
+				<p><sub><em>Plate key and stab cutouts are north/south agnostic. The orientation is solely dependent on the PCB.</em></sub></p>
+			</li> 
+		</ul>
+	</section>
+	
+	<section id="switches">
+		<h3>Switches</h3>
+		<p>There's 3 main types of switches: linear, tactile and clicky.</p>
+		<p>People can be very pasionate about a certain type and brand of switch so I won't go into too much detail and stick to the most common types/colors/actuation force</p>
+		<ul>
+			<li><strong>Linear switches</strong> (red 45g, yellow 50g, black 60g) have the same feeling when pressing them down throughout the entire distance (popular with gamers)</li>
+			<li><strong>Tactile switches</strong> (brown 45g, clear 55g) have a 'bump' on the way down</li>
+			<li><strong>Clicky switches</strong> (blue 60g, green 65g) have a 'bump' and a clearly audible click (usually preferred by typists - and hated by everyone else in the vicinity and/or voice chat)</li>
+		</ul>
+		<p>Some 'sub types' were added over the years, namely speed switches, silent (or quiet) switches and switches that try to help RGB keyboard shine brighter/distribute the light better</p>
+		<ul>
+			<li><strong>Speed switches</strong> have a shorter actuation distance </li>
+			<li><strong>Silent switches</strong> have a little rubber dampener applied to the inside of the switch. This reduces noise but affects the feel which some may prefer whilst others dislike it.</li>
+			<li><strong>*RGB switches</strong> have a transparent top housing to more evenly distribute light and depending on the brand may have a 'lens' above the LED position to enhance the lighting effect.</li>
+		</ul>
+		<sub><em>* RGB switches do not come with a LED, the actual RGB part (the LED) is on the PCB</em></sub>
+		
+
+		<section id="actuation-distance-and-force">
+		<h4>Actuation distance and force</h4>
+		<p>Now what is this about actuation distance and actuation force and all these different colors? </p>
+		<dl>
+			<dt>Actuation Force</dt>
+			<dd>The amount of force needed to push the switch down. If you're heavy handed or like to rest your fingers on the keyboard go for a higher value, if you want to spare your fingers the workout go with a lower value. For heavy keycaps such as those made out of metal or ceramic you may want to avoid going with very low values</dd>
+			
+			<dt>Actuation Distance</dt>
+			<dd>How far the switch has to be pushed in to register as pressed. Theoretically the faster this happens the faster you can react and do it again (which is why speed switches with the shortest actuation distance are aimed at gamers)</dd>
+		</dl>
+		<p>The colors are intended to easily tell the switches apart as they're all different in a way. Technically yellow and green aren't used by Cherry but these colors are used by Gateron which is also a very popular choice. My numbers aren't entirely acurate as Cherry provides actuation force numbers in centinewton and gateron in grams but they're close enough</p>
+		<h4>Switches - even deeper dive</h4>
+		<p>There's mechanical, optical and magnetic switches. I am however mostly interested in mechanical and optical switches as magnetic switches aren't really available to hobbyists</p>
+		<ul>
+			<li>
+				<strong>Mechanical switches</strong> are the easiest/most popular option but require debouncing. 
+				Rather than "on" when pressed and "off" when released the "on" is initially a series of very rapid on/off events due to the mechanical contacts bouncing. If not handled this would mean that every push of the key is likely to register multiple times. Keyboards 'debounce' in software by running a timer when the first "on" is registered and resetting it every time the on is registered again before the time runs out. When the timer does run out it's considered to be the end of that keystroke.
+				Running timers and having to wait for them to time out adds delay (a very minor delay in a long chain of things that can add delay) so whether it's noticable... opinions are split.
+				<ul class="conpro">
+					<li class="pro">Many options are available</li>
+					<li class="pro">Known wide spread technology with lots of documentation available</li>
+					<li class="con">Hot swap sockets are fragile</li>
+					<li class="con">Requires debouncing adding delay/complexity</li>
+					<li class="neutral">Complexity is in the switch making the PCB cheaper</li>
+				</ul>
+			</li>
+			<li>
+				<strong>Optical switches</strong> Are gaining popularity. They do away with mechanical contacts and work by having a light beam and a light recepter. When the switch gets pushed the light beam eithers get blocked or revealed (method depend on the exact switch). This doesn't require any debouncing and thus no timers that delay the process of registering a keystroke. 
+				The optical switches available to hobbyist are very 'dumb' and have no electronic parts whatsoever - unlike mechanical switches this means they don't require any electrical contacts they only need to block or unblock a lightsource.<br>
+				Information on this is very scarce but I found the <a href="https://github.com/girishji/keychron-optical-keyboard/tree/main/Footprints.pretty">keychron optical keyboard</a> which provides kicad files in which I've found the <code>IR12-21C_TR8</code> infrared emitter and <code><abbr title="Photo Transistor">PT</abbr>12-21B_TR8</code> photo transistor.
+				<ul class="conpro">
+					<li class="pro">More durable (no corroding contacts or fragile connectors)</li>
+					<li class="pro">Always hot swappable as they don't need contacts on the PCB
+						<ul><li>+ Additional benefit is that not needing contacts means there's no need for notoriously fragile hotswap sockets</li></ul>
+					</li>
+					<li class="con">Newer technology which means there's less documentation for it available</li>
+					<li class="con">Not many options are available, there's Gaterons optical line and that seems to be it for now (on the plus side they seem to re-use almost all of the regular mechanical switch housing minus the parts that aren't needed so they should be compatible/interchangable for mods and some parts)</li>
+					<li class="neutral">Complexity is in the PCB making the switches cheaper</li>
+				</ul>
+			</li>
+			<strong><u>Research to be done: Initial indicators pointed to not being able to matrix optical sensors which would require a lot more pins from the MCU or a way to multiplex them. keychron's kicad files seem to have a matrixed setup? (I don't know much about PCBs and KiCad at all yet!)</u></strong>
+		</ul>
+		</section>
+	</section>
+	
+	<section id="opensource-keyboard-firmware">
+		<h3>Opensource keyboard firmware</h3>
+		Don't re-invent the wheel (unless that's what you like doing), there's opensource keyboard firmware available for common <abbr title="Micro Controller Unit">MCU</abbr>s like the STM32F103, STM32F411, RP2040, nRF52840 and ATmega32U4 which are available on cheap accessible <abbr title="Printed Circuit Board">PCB</abbr>s
+		like the Raspberry Pi Pico, Arduino Pro Micro or the "Blue Pill", "Black Pill" and Teensy boards.<br/>
+		<ul>
+			<li>
+				<a href="https://github.com/tmk/tmk_core">TMK</a> The oldest free keyboard firmware(?) Not quite sure what its selling point is, it hasn't been updated in some years				
+			</li>
+			<li>
+				<a href="https://qmk.fm/">QMK</a> Probably the most used open keyboard firmware. Limited wireless support
+				<ul>
+					<li>Intergrates with <a href="https://www.caniusevia.com/">VIA</a> allows setting up different keylayers and macros and such</li>
+					<li>Intergrates with <a href="https://get.vial.today/">VIAL</a> (opensource alternative to VIA, does RGB configuration as well!)</li>
+				</ul>
+			</li>
+			<li><a href="https://zmk.dev/">ZMK</a> Mostly aimed at wireless keyboards and extremely low power usage, relatively young project
+				<ul>
+					<li>Runs on top of Zephyr™ <abbr title="Real Time Operating System">RTOS</abbr> and is limited to <a href="https://zmk.dev/docs/hardware">hardware supported by it</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="http://kmkfw.io/">KMKfw</a> Aimed at both wired and wireless use. Uses a fork of Circuit Python
+				<br><sup>My personal choice due to the low cost of a Banana Pi Leaf S3 board with a powerful ESP32-S3 and support for bluetooth and build-in battery circuitry</sup>
+				<ul>
+					<li>The <a href="http://kmkfw.io/docs/Officially_Supported_Microcontrollers">officially supported MCU</a> list is fairly short but it should run on any CircuitPython compatible board with 256KB of flash storage and <abbr title="Human Interface Device">HID</abbr> support over USB and/or Bluetooth </li>
+					<li>Intergrates with <a href="https://peg.software/">PEG</a> allowing OLED screen, RGB LEDs, Encoder and keymapping customisation.</li>
+				</ul>
+			</li>
+		</ul>
+	</section>
+</section>
+	<!-- https://cdn.shopify.com/s/files/1/0565/8070/2297/files/SPEC-KS-22H10B045NN-X50_Optical_Red_Switch.pdf?v=1667274249 -->
+</body>
+</html>

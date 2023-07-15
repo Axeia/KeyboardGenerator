@@ -1,0 +1,179 @@
+<svg width="34.2" height="20.97" fill="none" xmlns="http://www.w3.org/2000/svg">
+<!-- 
+  Based on: https://github.com/mohitg11/GH-CAD-Resources - 'MXSpec.pdf'
+  Sizes not explicitly mentioned in there have been calculated based on other sizes that are given.
+  The calculation to get to that size is in a comment in this document preceding the <text> element.
+-->
+<defs>
+    <marker id="arrowhead-start" markerWidth="5" markerHeight="3.5" refX="5" refY="1.75" orient="auto">
+        <polygon points="5 0, 5 3.5, 0 1.75" fill="#dd3333" />
+    </marker>
+    <marker id="arrowhead-end" markerWidth="5" markerHeight="3.5" refX="0" refY="1.75" orient="auto">
+        <polygon points="5 1.75, 0 0, 0 3.5" fill="#dd3333" />
+    </marker>
+    <marker id="arrowhead-start-v" markerWidth="5" markerHeight="3.5" refX="5" refY="1.75" orient="auto">
+        <polygon points="5 0, 5 3.5, 0 1.75" fill="#3333dd" />
+    </marker>
+    <marker id="arrowhead-end-v" markerWidth="5" markerHeight="3.5" refX="0" refY="1.75" orient="auto">
+        <polygon points="5 1.75, 0 0, 0 3.5" fill="#3333dd" />
+    </marker>
+</defs>
+<g transform="translate(2, 3)"> 
+    <svg width="32.15" height="14.97">
+    <path d="m0, 4.7
+      h0.875  
+      v-3.23  
+      h6.65 
+      v0.8
+      h1.575  
+      v-2.27  
+      h14
+      v2.27
+      h1.575
+      v-0.8
+      h6.65 v3.23 h0.875 
+      v2.8 h-0.875
+      v6.27
+      h-1.825 v1.2 h-3 v-1.2 h-1.825
+      v-0.8 h-1.575
+      v1.03
+      h-14
+      v-1.03
+      h-1.575
+      v0.8
+      h-1.825 v1.2 h-3 v-1.2 h-1.825
+      v-6.27
+      h-0.875 v2.8
+      " fill="#FFF9F2" />
+    </svg>
+    <!-- Side top -->
+    <line stroke="#dd3333" stroke-width="0.1" x1="0.8" y1="1.5" x2="7.5" y2="1.5" />
+      <text x="3.4" y="2.3" fill="#dd3333" font-size="0.8">6.65</text>
+  
+    <!-- top indent horizontal -->
+    <line stroke="#dd3333" stroke-width="0.1" x1="7.45" y1="2.29" x2="9.1" y2="2.29" />
+    <line stroke="#dd3333" stroke-width="0.1" x1="8.25" y1="2.8" x2="8.25" y2="6" marker-start="url(#arrowhead-start)" />
+    <!-- (23.8 - (6.65 + 14)) / 2 = 1.575 -->
+    <text x="7.1" y="7.2" fill="#dd3333" font-size="0.8">1.575</text>
+    <line stroke="#dd3333" stroke-width="0.1" x1="8.25" y1="8" x2="8.25" y2="12.4" id="bottom1575" marker-end="url(#arrowhead-end)" />
+    <line stroke="#dd3333" stroke-width="0.1" x1="7.45" y1="12.95" x2="9.1" y2="12.95"/>
+  
+    <!-- Middle switch -->
+    <rect width="14" height="14" x="9.05" y="0" fill="none" stroke-width="0.1" stroke="#dd3333" />
+  
+    <line stroke="#dd3333" stroke-width="0.1" x1="9.6" y1="6.9" x2="15.25" y2="6.9" id="left-arrow14" marker-start="url(#arrowhead-start)" />
+    <line stroke="#dd3333" stroke-width="0.1" x1="16.25" y1="0.5" x2="16.25" y2="6" id="top-arrow14" marker-start="url(#arrowhead-start)" />
+    <text x="15.75" y="7.2" fill="#dd3333" font-size="0.8">14</text>
+    <line stroke="#dd3333" stroke-width="0.1" x1="16.25" y1="8" x2="16.25" y2="13.5" id="bottom-arrow14" marker-end="url(#arrowhead-end)" />
+    <line stroke="#dd3333" stroke-width="0.1" x1="17" y1="6.9" x2="22.55" y2="6.9" id="left-arrow14" marker-end="url(#arrowhead-end)" />
+
+    <!-- Bottom nub -->
+    <line stroke="#dd3333" stroke-width="0.1" x1="2.7" y1="14.95" x2="5.6" y2="14.95" />
+    <text x="4" y="14.7" fill="#dd3333" font-size="0.8">3</text>
+    
+    <!-- Bottom left side of nub -->
+    <line stroke="#dd3333" stroke-width="0.1" x1="0.825" y1="13.75" x2="2.7" y2="13.75" />  
+    <polyline stroke="#dd3333" stroke-width="0.1" points="
+      1.8,13.2 
+      1.8,9.9
+      3,9.9
+      "
+      marker-start="url(#arrowhead-start)"
+    />
+    
+    <!-- Bottom right side of nub -->
+    <line stroke="#dd3333" stroke-width="0.1" x1="5.6" y1="13.75" x2="7.5" y2="13.75" />
+    <polyline stroke="#dd3333" stroke-width="0.1" points="
+      6.5,13.2 
+      6.5,9.9
+      5.4,9.9
+      "
+      marker-start="url(#arrowhead-start)"
+    />
+    <text x="3.2" y="10.2" fill="#dd3333" font-size="0.8">1.825</text>
+    <!-- Left side nub -->  
+    <line stroke="#dd3333" stroke-width="0.1" x1="0" y1="4.71" x2=".825" y2="4.71"  />
+    <line stroke="#dd3333" stroke-width=".1" x1="1.25" y1="4.71" x2="2" y2="4.71" marker-start="url(#arrowhead-start)"  />
+  
+    <line stroke="#dd3333" stroke-width="0.1" x1="0" y1="7.51" x2=".825" y2="7.51"  />
+    <line stroke="#dd3333" stroke-width=".1" x1="1.25" y1="7.51" x2="2" y2="7.51" marker-start="url(#arrowhead-start)"  />
+    <!-- (6.65 / 2) - 4.2 -->
+    <text x="1.5" y="6.4" fill="#dd3333" font-size="0.8">0.875</text>
+</g>
+
+  <!-- Side nub height left -->
+  <line stroke="#3333dd" stroke-width="0.1" x1="2" y1="7.65" x2="2" y2="10.56" />
+  <text text-anchor="middle" x="1.2" y="9.3" font-size="0.8" fill="#3333dd">2.8</text>
+  
+  <!-- Above side nub height left -->  
+  <line stroke="#3333dd" stroke-width="0.1" x1="2.85" y1="4.5" x2="2.85" y2="7.7" />   
+  <!-- 12.33 - 2.8 - 6.27 = 3.23 -->
+  <text text-anchor="middle" x="1.9" y="6.2" font-size="0.8" fill="#3333dd">3.23</text> 
+  
+  <!-- Below side nub height left -->  
+  <line stroke="#3333dd" stroke-width="0.1" x1="2.8" y1="10.5" x2="2.8" y2="16.8" />
+  <!-- 6.77 - 0.5 = 6.27 -->
+  <text text-anchor="middle" x="1.8" y="13.7" font-size="0.8" fill="#3333dd">6.27</text>
+    
+  <!-- Top indent left side, left side -->  
+  <line stroke="#3333dd" stroke-width="0.1" x1="9.5" y1="4.45" x2="9.5" y2="5.27" />
+  <polyline stroke="#3333dd" stroke-width="0.1" points="
+    9.9,4.85 
+    10.1,4.85
+    10.1,3.6
+    9,3.6
+    "
+    marker-start="url(#arrowhead-start-v)"
+  />
+  <text text-anchor="left" x="7.8" y="3.85" font-size="0.8" fill="#3333dd">0.8</text>
+
+  <!-- Top indent left side, right side -->  
+  <line stroke="#3333dd" stroke-width="0.1" x1="11.05" y1="3.0" x2="11.05" y2="5.27" />
+  <polyline stroke="#3333dd" stroke-width="0.1" points="
+    10.6,4.85
+    10.35,4.85
+    10.35,2
+    11.5,2
+    "
+    marker-start="url(#arrowhead-start-v)"
+  />  
+  <text text-anchor="right" x="11.7" y="2.3" font-size="0.8" fill="#3333dd">2.27</text>
+  
+  <!-- Bottom nub height-->
+  <line stroke="#3333dd" stroke-width="0.1" x1="4.65" y1="16.77" x2="4.65" y2="17.98" />
+  <polyline stroke="#3333dd" stroke-width="0.1" points="
+    4.65,18.43
+    4.65,18.8
+    5.4,18.8"
+    marker-start="url(#arrowhead-start-v)"
+  />  
+  <line stroke="#3333dd" stroke-width="0.1" x1="7.65" y1="16.77" x2="7.65" y2="17.98" />
+  <polyline stroke="#3333dd" stroke-width="0.1" points="
+    7.6,18.43
+    7.6,18.8
+    7,18.8"
+    marker-start="url(#arrowhead-start-v)"
+  />
+  <text text-anchor="middle" x="6.2" y="19" font-size="0.8" fill="#3333dd">1.2</text>
+  
+  <!-- Bottom indent left side, left side -->
+  <line stroke="#3333dd" stroke-width="0.1" x1="9.5" y1="15.97" x2="9.5" y2="16.78" />
+  <polyline stroke="#3333dd" stroke-width="0.1" points="
+    9.5,17.25
+    9.5,18.2"
+    marker-start="url(#arrowhead-start-v)"
+  />
+  <text text-anchor="left" x="9" y="19" font-size="0.8" fill="#3333dd">0.8</text>
+
+  <!-- Bottom indent left side, right side -->  
+  <line stroke="#3333dd" stroke-width="0.1" x1="11.05" y1="15.97" x2="11.05" y2="17.01" />
+  <polyline stroke="#3333dd" stroke-width="0.1" points="
+    11,17.5
+    11,18.8
+    11.8,18.8
+    "
+    marker-start="url(#arrowhead-start-v)"
+  />
+  <!-- 7 - (6.77 - 0.8) = 1.03 -->
+  <text text-anchor="left" x="12.05" y="19" font-size="0.8" fill="#3333dd">1.03</text>
+</svg>

@@ -1,0 +1,28 @@
+<svg width="32.1" height="14.97" fill="none" xmlns="http://www.w3.org/2000/svg">
+<!-- https://user-images.githubusercontent.com/3461282/66229026-97cbe000-e6e9-11e9-8b8d-d49386f9dcd1.png -->
+<path d="m0, 4.7
+  h0.825  
+  v-3.23  
+  h6.65 
+  v0.8
+  h1.575  
+  v-2.27  
+  h14
+  v2.27
+  h1.575
+  v-0.8
+  h6.65 v3.23 h0.825 
+  v2.8 h-0.825
+  v6.27
+  h-1.825 v1.2 h-3 v-1.2 h-1.825
+  v-0.8 h-1.575
+  v1.03
+  h-14
+  v-1.03
+  h-1.575
+  v0.8
+  h-1.825 v1.2 h-3 v-1.2 h-1.825
+  v-6.27
+  h-0.825 v2.8
+  " fill="#FFF9F2" />
+</svg>
