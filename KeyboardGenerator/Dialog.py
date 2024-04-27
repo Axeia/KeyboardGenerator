@@ -382,11 +382,7 @@ def cfgIntToQColor(argb):
 # Reads FreeCADs user configuration file and parses its content to extract
 # The code editors preferences so we can replicate the look.
 def GetUserConfig():
-    freeCadFolder = QtCore.QDir(cmdFolder)
-    freeCadFolder.cdUp()
-    freeCadFolder.cdUp()
-    userCfgPath = freeCadFolder.filePath('user.cfg')
-
+    userCfgPath = os.path.join(FreeCAD.ConfigGet('UserConfigPath'), 'user.cfg')
     tree = ET.parse(userCfgPath)
     root = tree.getroot()
 
