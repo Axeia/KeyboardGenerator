@@ -1,4 +1,4 @@
-import serial
+from pykle_serial import serial
 import typing
 from enum import Enum
 from typing import List

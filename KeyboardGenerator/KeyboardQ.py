@@ -3,7 +3,7 @@ from typing import List, NamedTuple
 from PySide2.QtGui import QPolygonF
 from dataclasses import dataclass
 from functools import cmp_to_key
-import serial
+from pykle_serial import serial
 import typing
 import xml.etree.ElementTree as ET
 import math

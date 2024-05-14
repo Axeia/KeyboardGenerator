@@ -16,14 +16,10 @@ from abc import abstractmethod
 cmdFolder = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Macro").GetString('MacroPath')
 cmdFolder += os.path.sep + "KeyboardGenerator" + os.path.sep
 
-pykleSerialFolder = cmdFolder  + 'pykle_serial'
-sys.path.append(pykleSerialFolder)
-
 iconFolder = cmdFolder + 'icons' + os.path.sep 
 svgFolder = cmdFolder  + 'svgs' + os.path.sep
 
-# Modules below can only be found after we expand the search path like done above
-import serial 
+from pykle_serial import serial
 import KeyboardQ
 from KeyboardQ import Corner
 import SvgPlateThickness
